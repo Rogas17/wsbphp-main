@@ -11,7 +11,7 @@
     //    echo "Nie udało się usunąć rekordu";
         $deleteUser = 0;
     }
-    header(header:"location: ../4_db/4_db_table_delete_add.php?deleteUser=$deleteUser");
+    header(header:"location: ../4_db/5_db_table_delete_add_update.php?deleteUser=$deleteUser");
     ?>
     <script>
     //    history.back();
