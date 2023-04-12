@@ -6,8 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./style/table.css">
     <title>Użytkownicy</title>
@@ -35,12 +34,11 @@
             </tr>
     TABLE;
     
-    
     if ($result->num_rows == 0){
         echo <<< TABLEUSERS
-        <tr>
-            <td colspan="6">Brak rekordów</td>
-        </tr>
+            <tr>
+                <td colspan="6">Brak rekordów</td>
+            </tr>
         TABLEUSERS;
     }else{
         while($user = $result->fetch_assoc()){
@@ -56,9 +54,8 @@
                 <td><a href="../scripts/delete_user.php?deleteUserId=$user[id]">Usuń</a></td>
                 <td><a href="./5_db_table_delete_add_update.php?updateUserId=$user[id]">Aktualizuj użytkownika</a></td>
             </tr>
-    TABLEUSERS;
-    }
-
+            TABLEUSERS;
+        }
     }
     echo "</table>";
     if (isset($_GET["deleteUser"])){
@@ -71,27 +68,27 @@
 
     //dodawanie użytkownika
     if (isset($_GET["addUserForm"])){
-        echo<<<ADDUSERFORM
+        echo <<< ADDUSERFORM
             <h4>Dodawanie użytkownika</h4>
             <form action="../scripts/add_user.php" method="post">
                 <input type="text" name="firstName" placeholder="Podaj imię" autofocus><br><br>
                 <input type="text" name="lastName" placeholder="Podaj nazwisko"><br><br>
                 <!--<input type="text" name="city_id" value="1"><br><br>-->
                 <!-- Miasto -->
-                <select name="city_id">
+                <select name="city_id">m
         ADDUSERFORM;
             $sql = "SELECT * FROM cities;";
             $result = $conn->query($sql);
             while ($city = $result->fetch_assoc()){
                 echo "<option value=\"$city[id]\">$city[city]</option>";
             }
-                echo <<< ADDUSERFORM
-                    </select><br><br>
-                    <input type="date" name="birthday">Data urodzenia<br><br>
-                    <input type="checkbox" name="term" checked>Regulamin<br></br>
-                    <input type="submit" value="Dodaj użytkownika">
+            echo <<< ADDUSERFORM
+                </select><br><br>
+                <input type="date" name="birthday">Data urodzenia<br><br>
+                <input type="checkbox" name="term" checked>Regulamin<br></br>
+                <input type="submit" value="Dodaj użytkownika">
             </form>
-    ADDUSERFORM;
+            ADDUSERFORM;
     }else{
         echo "<hr><a href=\"./5_db_table_delete_add_update.php?addUserForm=1\">Dodaj użytkownika</a>";
     }
@@ -120,12 +117,12 @@
                     echo "<option value=\"$city[id]\">$city[city]</option>";
                 }
             }
-                echo <<< UPDATEUSERFORM
-                    </select><br><br>
-                    <input type="date" name="birthday" value="$updateUser[birthday]">Data urodzenia<br><br>
-                    <input type="submit" value="Aktualizuj użytkownika">
+            echo <<< UPDATEUSERFORM
+                </select><br><br>
+                <input type="date" name="birthday" value="$updateUser[birthday]">Data urodzenia<br><br>
+                <input type="submit" value="Aktualizuj użytkownika">
             </form>
-    UPDATEUSERFORM;
+            UPDATEUSERFORM;
     }else{
         echo "<br><br>";
     }
