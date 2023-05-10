@@ -22,6 +22,11 @@ if (!isset($_POST["terms"])){
     $error = 1; 
 }
 
+if (!isset($_POST["avatar"])){
+    $_SESSION["error"] = "Wybierz płeć!";
+    $error = 1; 
+}
+
 if ($_POST["pass1"] != $_POST["pass2"]){
     $_SESSION["error"] = "Hasła są różne!";
     $error = 1; 
@@ -37,13 +42,32 @@ if ($error != 0){
     exit();
 }
 
+$stmt = $conn->prepare("SELECT * from users WHERE email=?");
+$stmt->bind_param('s', $_POST["email1"]);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows != 0){
+    $_SESSION["error"] = "Podany email jest zajęty!";
+    echo "<script>history.back();</script>";
+    exit();
+}
+
+/*
+while($user = $result->fetch_assoc()){
+    echo $user['firstName'];
+}
+*/
+
 //musimy być przekierowani do formularza, wyświetlić nad formularzem komunikat
 
-$stmt = $conn->prepare("INSERT INTO `users` (`email`, `city_id`, `firstName`, `lastName`, `birthday`, `password`, `created_at`) VALUES (?, ?, ?, ?, ?, ?, current_timestamp());");
+$stmt = $conn->prepare("INSERT INTO `users` (`email`, `city_id`, `firstName`, `lastName`, `birthday`, `avatar`, `password`, `created_at`) VALUES (?, ?, ?, ?, ?, ?, ?, current_timestamp());");
 
 $pass = password_hash('$_POST[pass1]', PASSWORD_ARGON2ID);
 
-$stmt->bind_param('sissss', $_POST["email1"], $_POST["city_id"], $_POST["firstName"], $_POST["lastName"], $_POST["birthday"], $pass);
+
+$avatar = ($_POST["avatar"] == 'w') ? '../img/woman.png' : '../img/man.png';
+
+$stmt->bind_param('sisssss', $_POST["email1"], $_POST["city_id"], $_POST["firstName"], $_POST["lastName"], $_POST["birthday"], $avatar, $pass);
 
 $stmt->execute();
 

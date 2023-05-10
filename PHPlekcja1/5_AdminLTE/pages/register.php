@@ -46,7 +46,7 @@
 
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+      <a href="./" class="h1"><b>Admin</b>LTE</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
@@ -133,6 +133,21 @@
           </div>
         </div>
 
+        <!-- płeć -->
+        <div class="input-group mb-1">
+          <div class="custom-control custom-radio">
+            <input class="custom-control-input" type="radio" id="w" name="avatar" value="w" checked>
+            <label for="w" class="custom-control-label">Kobieta</label>
+          </div>
+        </div>
+
+        <div class="input-group mb-1">
+          <div class="custom-control custom-radio">
+            <input class="custom-control-input" type="radio" id="m" name="avatar" value="m">
+            <label for="m" class="custom-control-label">Mężczyzna</label>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-7">
             <div class="icheck-primary">
@@ -161,7 +176,7 @@
         </a>
       </div>
 
-      <a href="login.html" class="text-center">Już mam konto</a>
+      <a href="./" class="text-center">Już mam konto</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
