@@ -23,24 +23,27 @@
     if (isset($_SESSION["error"])){
       echo <<< ERROR
         <div class="alert alert-danger alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-          <h5><i class="icon fas fa-ban"></i> Uwaga!</h5>
-          $_SESSION[error]
-        </div>
-      ERROR;
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h5><i class="icon fas fa-ban"></i> Uwaga!</h5>
+    $_SESSION[error]
+  </div>
+ERROR;
       unset($_SESSION["error"]);
     }
-    if (isset($_SESSION["success"])){
-      echo <<< SUCCESS
+
+  if (isset($_SESSION["success"])){
+	  echo <<< ERROR
         <div class="alert alert-success alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-          <h5><i class="icon fas fa-ban"></i> Uwaga!</h5>
-          $_SESSION[success]
-        </div>
-      SUCCESS;
-      unset($_SESSION["success"]);
-    }
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h5><i class="icon fas fa-ban"></i> Uwaga!</h5>
+    $_SESSION[success]
+  </div>
+ERROR;
+	  unset($_SESSION["success"]);
+  }
   ?>
+
+
 
 
 
@@ -49,9 +52,10 @@
       <a href="./" class="h1"><b>Admin</b>LTE</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Rejestracja użytkownika</p>
 
       <form action="../scripts/register.php" method="post">
+
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Podaj imię" name="firstName">
           <div class="input-group-append">
@@ -89,6 +93,24 @@
         </div>
 
         <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Podaj dodatkowy email" name="additional_email1">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Powtórz dodatkowy email" name="additional_email2">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Podaj hasło" name="pass1">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -110,10 +132,11 @@
           <input type="date" class="form-control" name="birthday">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-calendar"></span>
             </div>
           </div>
         </div>
+
 
         <div class="input-group mb-3">
           <select class="custom-select" name="city_id">
@@ -125,6 +148,7 @@
                 echo "<option value='$city[id]'>$city[city]</option>";
               }
             ?>
+
           </select>
           <div class="input-group-append">
             <div class="input-group-text">
@@ -133,7 +157,7 @@
           </div>
         </div>
 
-        <!-- płeć -->
+<!-- płeć -->
         <div class="input-group mb-1">
           <div class="custom-control custom-radio">
             <input class="custom-control-input" type="radio" id="w" name="avatar" value="w" checked>
@@ -157,6 +181,7 @@
               </label>
             </div>
           </div>
+
           <!-- /.col -->
           <div class="col-5">
             <button type="submit" class="btn btn-primary btn-block">Rejestracja</button>
@@ -168,15 +193,15 @@
       <div class="social-auth-links text-center">
         <a href="#" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i>
-          Zajerestruje się za pomocą Facebook
+          Sign up using Facebook
         </a>
         <a href="#" class="btn btn-block btn-danger">
           <i class="fab fa-google-plus mr-2"></i>
-          Zajerestruj się za pomocą Google+
+          Sign up using Google+
         </a>
       </div>
 
-      <a href="./" class="text-center">Już mam konto</a>
+      <a href="./" class="text-center">Mam już konto</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
