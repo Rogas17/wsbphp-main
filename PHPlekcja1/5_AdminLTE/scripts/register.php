@@ -38,15 +38,14 @@
 			exit();
 		}
 
-        
-
 		if ($_POST["email1"] != $_POST["email2"]){
 			$errors[] = "Adresy poczty elektronicznej są różne!";
-        }else{
-            if (!filter_var($_POST["email1"], FILTER_VALIDATE_EMAIL)){
-                $errors[] = "To nie jest adres poczty elektronicznej!";
-            }
-        }
+		}else{
+			if (!filter_var($_POST["email1"], FILTER_VALIDATE_EMAIL)){
+				$errors[] = "To nie jest adres poczty elektronicznej!";
+			}
+		}
+
 
 		if ($_POST["additional_email1"] != $_POST["additional_email2"]){
 			$errors[] = "Adresy dodatkowej poczty elektronicznej są różne!";
@@ -54,9 +53,9 @@
 			if (empty($_POST["additional_email1"]))
 				$_POST["additional_email1"] = NULL;
 
-            if (!filter_var($_POST["email1"], FILTER_VALIDATE_EMAIL)){
-                $errors[] = "To nie jest adres poczty elektronicznej!";
-            }
+			if (!filter_var($_POST["email1"], FILTER_VALIDATE_EMAIL)){
+				$errors[] = "To nie jest adres poczty elektronicznej!";
+			}
 		}
 
 		if ($_POST["pass1"] != $_POST["pass2"])
@@ -95,7 +94,6 @@
 			echo "<script>history.back();</script>";
 			exit();
 		}
-
 		//echo $result->num_rows;
 		/*
 		while ($user = $result->fetch_assoc()) {
@@ -105,7 +103,8 @@
 
 		$stmt = $conn->prepare("INSERT INTO `users` (`email`, `additional_email`, `city_id`, `firstName`, `lastName`, `birthday`, `avatar`, `password`, `created_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, current_timestamp());");
 
-		$pass = password_hash('$_POST[pass1]', PASSWORD_ARGON2ID);
+		$pass = password_hash($_POST["pass1"], PASSWORD_ARGON2ID);
+
 
 		$avatar = ($_POST["avatar"] == 'w') ? './img/woman.png' : './img/man.png';
 

@@ -1,5 +1,9 @@
 <?php
   session_start();
+  if(isset($_SESSION["logged"]) && session_status() == 2 && session_id() == $_SESSION["logged"]["session_id"]){
+    $_SESSION["error"] = "Zaloguj się!";
+    echo "<script>history.back();</script>";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,26 +28,46 @@
     if (isset($_GET["error"])){
       echo <<< ERROR
         <div class="callout callout-danger">
-          <h5>Błąd</h5>
-          <p>$_GET[error]</p>
+                  <h5>Błąd!</h5>
+                  <p>$_GET[error]</p>
         </div>
-      ERROR;
+ERROR;
       unset($_GET["error"]);
     }
 
-    if (isset($_SESSION["success"])){
+    if (isset($_GET["logout"])){
       echo <<< ERROR
-        <div class="callout callout-success">
-          <h5>Gratulacje!</h5>
-          <p>$_SESSION[success]</p>
+        <div class="callout callout-info">
+                  <h5>Info!</h5>
+                  <p>Prawodłowo wylogowano użytkownika</p>
         </div>
-      ERROR;
-      unset($_SESSION["success"]);
+ERROR;
+      unset($_GET["error"]);
     }
+
+  if (isset($_SESSION["success"])){
+	  echo <<< ERROR
+        <div class="callout callout-success">
+                  <h5>Gratulacje!</h5>
+                  <p>$_SESSION[success]</p>
+        </div>
+ERROR;
+	  unset($_SESSION["success"]);
+  }
+
+  if (isset($_SESSION["error"])){
+	  echo <<< ERROR
+        <div class="callout callout-danger">
+                  <h5>Błąd!</h5>
+                  <p>$_SESSION[error]</p>
+        </div>
+ERROR;
+	  unset($_SESSION["success"]);
+  }
   ?>
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="./" class="h1"><b>Admin</b>LTE</a>
+      <a href="#" class="h1"><b>Admin</b>LTE</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Logowanie</p>
@@ -70,7 +94,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                Zapamiętaj mnie
+                Remember Me
               </label>
             </div>
           </div>
@@ -93,10 +117,10 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">Zapomniałem hasło</a>
+        <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.php" class="text-center">Zarejestruj się</a>
+        <a href="register.php" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
